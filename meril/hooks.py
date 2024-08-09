@@ -82,7 +82,8 @@ app_license = "mit"
 # Name of the app being installed is passed as an argument
 
 # before_app_install = "meril.utils.before_app_install"
-# after_app_install = "meril.utils.after_app_install"
+after_app_install = "meril.utils.after_app_install"
+
 
 # Integration Cleanup
 # -------------------
@@ -122,13 +123,23 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+    "*": {
+        "after_insert": "meril.utils.after_insert",
+        # "on_cancel": "method",
+        # "on_trash": "method"
+    },
+    "Doctype": {
+        "after_insert": "meril.utils.after_doc_insert"
+    },
+    "Employee": {
+        "after_insert": "meril.utils.on_employee_insert",
+        "on_update": "meril.utils.on_employee_update"
+    },
+    "CN Team": {
+        "on_update": "meril.utils.on_team_update"
+    }
+}
 
 # Scheduled Tasks
 # ---------------
